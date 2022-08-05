@@ -30,15 +30,15 @@
         <form action="" class="top-form">
             <div class="textarea-holder">
                 <div class="disabled"></div>
-                <textarea name="" id="topLeft" cols="30" rows="10"></textarea>
+                <textarea name="" id="topLeft" cols="30" rows="10" disabled></textarea>
             </div>
             <div class="textarea-holder">
                 <div class="disabled"></div>
-                <textarea name="" id="topMiddle" cols="30" rows="10"></textarea>
+                <textarea name="" id="topMiddle" cols="30" rows="10" disabled></textarea>
             </div>
             <div class="textarea-holder">
                 <div class="disabled"></div>
-                <textarea name="" id="topRight" cols="30" rows="10"></textarea>
+                <textarea name="" id="topRight" cols="30" rows="10" disabled></textarea>
             </div>
             <div class="buttons">
                 <a href="#" class="btn"><i class="icofont-ui-play"></i> Run </a>
@@ -100,6 +100,7 @@
                         <div class="newText" fileName="file2" code="hi
                         how are you man?
                         fine thanks."></div>
+                        <div class="intro" intro="miew"></div>
                     </li>
                     <li>
                         <span class="title">Button two</span>
@@ -108,19 +109,21 @@
                         see u?"></div>
                         <div class="newText" fileName="file2" code="goodbye
                         see u?"></div>
+                        <div class="intro" intro="mieow"></div>
                     </li>
                     <li>
                         <span class="title">Button three</span>
                         <span class="pill pill-green"></span>
                         <div class="oldText" fileName="file1" code="bye"></div>
                         <div class="newText" fileName="file1" code="bye"></div>
+                        <div class="intro" intro="MAWOOO"></div>
                     </li>
                 </ul>
             </div>
             <div class="textarea-holder">
                 <div id="myDiffElementId"></div>
             </div>
-            <div class="textarea-holder">
+            <div class="textarea-holder intro-area">
                 <div class="disabled"></div>
                 <textarea name="" id="bottomRight" cols="30" rows="10"></textarea>
             </div>
@@ -143,14 +146,6 @@
         codeground("topLeft", 'hello\nhi');
         codeground("topMiddle", 'how');
         codeground("topRight", 'are you?');
-        codeground("bottomRight", `PHPUnit 9.5.9 by Sebastian Bergmann and contributors.
-
-.                                                                   1 / 1 (100%)
-
-Time: 00:00.003, Memory: 18.00 MB
-
-OK (1 test, 1 assertion)`);
-
 
         
     </script>

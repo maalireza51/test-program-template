@@ -10,7 +10,7 @@ function codeground(id, text) {
         lineNumbers: true,
     });
     editor.getDoc().setValue(text);
-    var lines = editor.getValue().split('\n');
+    // var lines = editor.getValue().split('\n');
     // for (var i = 0; i < lines.length; i++) {
     //     if (0 < lines[i].indexOf("flag")) {
     //         editor.getDoc().markText({ line: i, ch: 0 }, { line: i, ch: lines[i].length }, { css: "background-color: yellow" });
@@ -35,8 +35,10 @@ var oldText = document.querySelector('.oldText').getAttribute('code');
 var oldName = document.querySelector('.oldText').getAttribute('fileName');
 var newText = document.querySelector('.newText').getAttribute('code');
 var newName = document.querySelector('.newText').getAttribute('fileName');
+var intro = document.querySelector('.intro').getAttribute('intro');
 
-function defaultdiff(oldName, newName, oldText, newText) {
+function defaultdiff(oldName, newName, oldText, newText, intro) {
+    codeground("bottomRight", intro);
     var targetElement = document.getElementById('myDiffElementId');
     document.addEventListener('DOMContentLoaded', function () {
 
@@ -53,13 +55,17 @@ function defaultdiff(oldName, newName, oldText, newText) {
         diff2htmlUi.draw();
         diff2htmlUi.highlightCode();
     });
+    
 }
 
-defaultdiff(oldName, newName, oldText, newText);
+defaultdiff(oldName, newName, oldText, newText, intro);
 
 // ========================= when a button clicked ========================= //
 
-function clickeddiff(oldName, newName, oldText, newText) {
+function clickeddiff(oldName, newName, oldText, newText, intro) {
+    var codemirrorArea = document.querySelector('.intro-area>.cm-s-default');
+    document.querySelector('.intro-area').removeChild(codemirrorArea);
+    codeground("bottomRight", intro);
     var targetElement = document.getElementById('myDiffElementId');
     targetElement.innerHTML = '';
 
@@ -78,13 +84,13 @@ function clickeddiff(oldName, newName, oldText, newText) {
     diff2htmlUi.highlightCode();
 }
 
-
 var buttons = document.querySelectorAll('li');
 buttons.forEach(element => {
     var oldText = element.querySelector('.oldText').getAttribute('code');
     var newText = element.querySelector('.newText').getAttribute('code');
     var oldName = element.querySelector('.oldText').getAttribute('fileName');
     var newName = element.querySelector('.newText').getAttribute('fileName');
+    var intro = element.querySelector('.intro').getAttribute('intro');
 
     // -------------------- escape and killed color -------------------------- //
     // var btnMode = false;
@@ -109,6 +115,6 @@ buttons.forEach(element => {
             btn.classList.remove('active');
         });
         element.classList.add('active')
-        clickeddiff(oldName, newName, oldText, newText);
+        clickeddiff(oldName, newName, oldText, newText, intro);
     };
 });
