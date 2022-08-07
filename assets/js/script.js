@@ -8,6 +8,8 @@ function codeground(id, text) {
         path: "js/",
         continuousScanning: 500,
         lineNumbers: true,
+        editable: false,
+        readOnly: true
     });
     editor.getDoc().setValue(text);
     // var lines = editor.getValue().split('\n');
