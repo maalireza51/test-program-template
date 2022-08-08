@@ -1,24 +1,47 @@
 
 // ===================== codemirror configuration for textarea ====================== //
-function codeground(id, text) {
+function codegroundphp(id) {
     var editor = CodeMirror.fromTextArea(document.getElementById(id), {
-        height: "350px",
-        parserfile: "parsexml.js",
-        stylesheet: "css/xmlcolors.css",
-        path: "js/",
-        continuousScanning: 500,
         lineNumbers: true,
-        editable: false,
-        readOnly: true
-    });
-    editor.getDoc().setValue(text);
-    // var lines = editor.getValue().split('\n');
-    // for (var i = 0; i < lines.length; i++) {
-    //     if (0 < lines[i].indexOf("flag")) {
-    //         editor.getDoc().markText({ line: i, ch: 0 }, { line: i, ch: lines[i].length }, { css: "background-color: yellow" });
-    //     }
-    // }
+        matchBrackets: true,
+        mode: "application/x-httpd-php",
+        indentUnit: 8,
+        indentWithTabs: true,
+        enterMode: "keep",
+        tabMode: "shift",
+        readOnly:true,
+      });
 }
+function codegroundjs(id) {
+    var editor = CodeMirror.fromTextArea(document.getElementById(id), {
+        lineNumbers: true,
+        matchBrackets: true,
+        mode: "text/javascript",
+        indentUnit: 8,
+        indentWithTabs: true,
+        enterMode: "keep",
+        tabMode: "shift",
+        readOnly:true,
+      });
+}
+function codegroundxml(id) {
+    var editor = CodeMirror.fromTextArea(document.getElementById(id), {
+        lineNumbers: true,
+        matchBrackets: true,
+        mode: "application/xml",
+        indentUnit: 8,
+        indentWithTabs: true,
+        enterMode: "keep",
+        tabMode: "shift",
+        readOnly:true,
+      });
+}
+
+
+// textareas
+codegroundphp("topLeft")
+codegroundjs("topMiddle");
+codegroundxml("topRight");
 
 
 // ===================== if you want to disable a text area ===================//
@@ -37,10 +60,8 @@ var oldText = document.querySelector('.oldText').getAttribute('code');
 var oldName = document.querySelector('.oldText').getAttribute('fileName');
 var newText = document.querySelector('.newText').getAttribute('code');
 var newName = document.querySelector('.newText').getAttribute('fileName');
-var intro = document.querySelector('.intro').getAttribute('intro');
 
-function defaultdiff(oldName, newName, oldText, newText, intro) {
-    codeground("bottomRight", intro);
+function defaultdiff(oldName, newName, oldText, newText) {
     var targetElement = document.getElementById('myDiffElementId');
     document.addEventListener('DOMContentLoaded', function () {
 
@@ -60,14 +81,11 @@ function defaultdiff(oldName, newName, oldText, newText, intro) {
     
 }
 
-defaultdiff(oldName, newName, oldText, newText, intro);
+defaultdiff(oldName, newName, oldText, newText);
 
 // ========================= when a button clicked ========================= //
 
-function clickeddiff(oldName, newName, oldText, newText, intro) {
-    var codemirrorArea = document.querySelector('.intro-area>.cm-s-default');
-    document.querySelector('.intro-area').removeChild(codemirrorArea);
-    codeground("bottomRight", intro);
+function clickeddiff(oldName, newName, oldText, newText) {
     var targetElement = document.getElementById('myDiffElementId');
     targetElement.innerHTML = '';
 
@@ -92,7 +110,6 @@ buttons.forEach(element => {
     var newText = element.querySelector('.newText').getAttribute('code');
     var oldName = element.querySelector('.oldText').getAttribute('fileName');
     var newName = element.querySelector('.newText').getAttribute('fileName');
-    var intro = element.querySelector('.intro').getAttribute('intro');
 
     // -------------------- escape and killed color -------------------------- //
     // var btnMode = false;
@@ -117,6 +134,6 @@ buttons.forEach(element => {
             btn.classList.remove('active');
         });
         element.classList.add('active')
-        clickeddiff(oldName, newName, oldText, newText, intro);
+        clickeddiff(oldName, newName, oldText, newText);
     };
 });

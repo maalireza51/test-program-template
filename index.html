@@ -12,7 +12,8 @@
     <link rel="stylesheet" href="assets/fonts/icofont/icofont.css">
 
     <!-- codemirror for textareas which have row numbers -->
-    <link rel="stylesheet" href="assets/css/codemirror.min.css" />
+    <link rel="stylesheet" href="assets/css/codemirror.css" />
+    <link rel="stylesheet" href="assets/theme/default.css" />
 
     <!-- diff2html for realize the diffrence between codes -->
     <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.1/styles/github.min.css" /> -->
@@ -23,23 +24,96 @@
 </head>
 
 <body>
+    <header>
+        <img src="assets/img/logo.png" alt="" class="logo">
+        <div>PHP Mutation Testing</div>
+    </header>
     <div class="form">
         <form action="" class="top-form">
             <div class="textarea-holder">
                 <div class="disabled"></div>
-                <textarea name="" id="topLeft" cols="30" rows="10"></textarea>
+                <textarea name="" id="topLeft" >
+<?php
+    function hello($who) {
+        return "Hello " . $who;
+    }
+?>
+<p>The program says <?= hello("World") ?>.</p>
+<script>
+	alert("And here is some JS code"); // also colored
+</script></textarea>
             </div>
             <div class="textarea-holder">
                 <div class="disabled"></div>
-                <textarea name="" id="topMiddle" cols="30" rows="10"></textarea>
+                <textarea name="" id="topMiddle">
+// Demo code (the actual new parser character stream implementation)
+
+function StringStream(string) {
+  this.pos = 0;
+  this.string = string;
+}
+
+StringStream.prototype = {
+  done: function() {return this.pos >= this.string.length;},
+  peek: function() {return this.string.charAt(this.pos);},
+  next: function() {
+    if (this.pos < this.string.length)
+      return this.string.charAt(this.pos++);
+  },
+  eat: function(match) {
+    var ch = this.string.charAt(this.pos);
+    if (typeof match == "string") var ok = ch == match;
+    else var ok = ch && match.test ? match.test(ch) : match(ch);
+    if (ok) {this.pos++; return ch;}
+  },
+  eatWhile: function(match) {
+    var start = this.pos;
+    while (this.eat(match));
+    if (this.pos > start) return this.string.slice(start, this.pos);
+  },
+  backUp: function(n) {this.pos -= n;},
+  column: function() {return this.pos;},
+  eatSpace: function() {
+    var start = this.pos;
+    while (/\s/.test(this.string.charAt(this.pos))) this.pos++;
+    return this.pos - start;
+  },
+  match: function(pattern, consume, caseInsensitive) {
+    if (typeof pattern == "string") {
+      function cased(str) {return caseInsensitive ? str.toLowerCase() : str;}
+      if (cased(this.string).indexOf(cased(pattern), this.pos) == this.pos) {
+        if (consume !== false) this.pos += str.length;
+        return true;
+      }
+    }
+    else {
+      var match = this.string.slice(this.pos).match(pattern);
+      if (match && consume !== false) this.pos += match[0].length;
+      return match;
+    }
+  }
+};
+
+                </textarea>
             </div>
             <div class="textarea-holder">
                 <div class="disabled"></div>
-                <textarea name="" id="topRight" cols="30" rows="10"></textarea>
+                <textarea name="" id="topRight">
+<html style="color: green">
+  <!-- this is a comment -->
+  <head>
+    <title>HTML Example</title>
+  </head>
+  <body>
+    The indentation tries to be <em>somewhat &quot;do what
+    I mean&quot;</em>... but might not match your style.
+  </body>
+</html>
+                </textarea>
             </div>
             <div class="buttons">
-                <a href="#" class="btn"><i class="icofont-ui-play"></i> Run </a>
-                <a href="#" class="btn"><i class="icofont-copy"></i> Copy URL </a>
+                <!-- <a href="#" class="btn"><i class="icofont-ui-play"></i> Run </a>
+                <a href="#" class="btn"><i class="icofont-copy"></i> Copy URL </a> -->
                 <span>Revision was created with Infection 0.26.5 and PHPUnit 9.5.9</span>
             </div>
         </form>
@@ -120,15 +194,48 @@
             <div class="textarea-holder">
                 <div id="myDiffElementId"></div>
             </div>
-            <div class="textarea-holder intro-area">
-                <div class="disabled"></div>
-                <textarea name="" id="bottomRight" cols="30" rows="10"></textarea>
-            </div>
+            <p class="console scrollable">            
+                7 mutations were generated:<br>
+                2 mutants were killed<br>
+                0 mutants were configured to be ignored<br>
+                0 mutants were not covered by tests<br>
+                5 covered mutants were not detected<br>
+                0 errors were encountered<br>
+                0 syntax errors were encountered<br>
+                0 time outs were encountered<br>
+                0 mutants required more time than configured<br>
+                Metrics:<br>
+                Mutation Score Indicator (MSI): 28%<br>
+                Mutation Code Coverage: 100%<br>
+                Covered Code MSI: 28%<br>
+                Please note that some mutants will inevitably be harmless (i.e. false positives).<br>
+                Time: 3s. Memory: 16.00MB
+                7 mutations were generated:<br>
+                2 mutants were killed<br>
+                0 mutants were configured to be ignored<br>
+                0 mutants were not covered by tests<br>
+                5 covered mutants were not detected<br>
+                0 errors were encountered<br>
+                0 syntax errors were encountered<br>
+                0 time outs were encountered<br>
+                0 mutants required more time than configured<br>
+                Metrics:<br>
+                Mutation Score Indicator (MSI): 28%<br>
+                Mutation Code Coverage: 100%<br>
+                Covered Code MSI: 28%<br>
+                Please note that some mutants will inevitably be harmless (i.e. false positives).<br>
+                Time: 3s. Memory: 16.00MB
+            </p>
         </form>
     </div>
 
     <!-- codemirror -->
-    <script type="text/javascript" src="assets/js/codemirror.min.js"></script>
+    <script type="text/javascript" src="assets/js/CodeMirror/codemirror.js"></script>
+    <script type="text/javascript" src="assets/js/CodeMirror/xml/xml.js"></script>
+    <script type="text/javascript" src="assets/js/CodeMirror/javascript/javascript.js"></script>
+    <script type="text/javascript" src="assets/js/CodeMirror/css/css.js"></script>
+    <script type="text/javascript" src="assets/js/CodeMirror/clike/clike.js"></script>
+    <script type="text/javascript" src="assets/js/CodeMirror/php/php.js"></script>
 
     <!-- diff2html -->
     <script type="text/javascript" src="assets/js/diff2html-ui.min.js"></script>
@@ -138,14 +245,6 @@
 
     <!-- main js -->
     <script type="text/javascript" src='assets/js/script.js'></script>
-    <script>
-        // textareas
-        codeground("topLeft", 'hello\nhi');
-        codeground("topMiddle", 'how');
-        codeground("topRight", 'are you?');
-
-        
-    </script>
 </body>
 
 </html>

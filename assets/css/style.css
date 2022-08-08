@@ -8,12 +8,24 @@ body{
 }
 
 header{
-    text-align: center;
+    display: flex;
+    justify-content: space-between;
+    text-align: left;
     padding: 10px;
     background-color: #fff;
     font-size: 30px;
     margin-bottom: 10px;
     border-bottom: 1px solid #ccc;
+}
+header>div{
+    font-size: 14px;
+    align-self: center;
+    padding-right: 20px;
+}
+
+.logo{
+    width: 150px;
+    padding-left:20px;
 }
 
 .top-form{
@@ -52,6 +64,10 @@ header{
 
 .buttons{
     flex: 1 0 100%;
+}
+
+.buttons>span{
+    margin: 0 15px;
 }
 
 .btn{
@@ -114,6 +130,11 @@ header{
     -ms-border-radius: 10px;
     -o-border-radius: 10px;
     /* cursor:text; */
+}
+
+.console.scrollable{
+    max-height: 300px;
+    overflow: auto;
 }
 
 .textarea-holder ul{
