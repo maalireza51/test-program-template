@@ -14,7 +14,7 @@ header{
     padding: 10px;
     background-color: #fff;
     font-size: 30px;
-    margin-bottom: 10px;
+    margin-bottom: 30px;
     border-bottom: 1px solid #ccc;
 }
 header>div{
@@ -37,10 +37,12 @@ header>div{
     flex: 1 0 0%;
     min-width: 300px;
     margin: 10px;
+    margin-bottom: 20px;
     border: 1px solid #ccc;
+    border-top-right-radius: 0 !important;
     background-color: #fff;
     position: relative;
-    overflow: hidden;
+    /* overflow: hidden; */
     border-radius: 10px;
     -webkit-border-radius: 10px;
     -moz-border-radius: 10px;
@@ -102,8 +104,10 @@ header>div{
     background-color: #fff;
     margin: 10px;
     padding: 10px;
+    padding-right: 0;
     border: 1px solid #ccc;
     border-radius: 10px;
+    border-top-right-radius: 0 !important;
     -webkit-border-radius: 10px;
     -moz-border-radius: 10px;
     -ms-border-radius: 10px;
@@ -119,12 +123,13 @@ header>div{
     flex: 1 0 0%;
     min-width: 300px;
     max-height: 320px;
-    margin: 10px;
+    margin: 20px 10px;
     border: 1px solid #ccc;
     background-color: #fff;
     position: relative;
-    overflow: auto;
+    /* overflow: auto; */
     border-radius: 10px;
+    border-top-right-radius: 0 !important;
     -webkit-border-radius: 10px;
     -moz-border-radius: 10px;
     -ms-border-radius: 10px;
@@ -133,6 +138,16 @@ header>div{
 }
 
 .console.scrollable{
+    margin: 20px 10px;
+    max-height: 300px;
+    position: relative;
+}
+
+.console.scrollable span{
+    font-size: 16px;
+}
+
+.console.scrollable p{
     max-height: 300px;
     overflow: auto;
 }
@@ -202,4 +217,22 @@ header>div{
 
 .intro{
     display: none;
+}
+
+/* label */
+.label{
+    position: absolute;
+    top: -24px;
+    right: -1px;
+    padding: 0 50px;
+    height: 23px;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-bottom: 0;
+    text-align: center;
+    border-radius: 50px 0 0 0;
+    -webkit-border-radius: 50px 0 0 0;
+    -moz-border-radius: 50px 0 0 0;
+    -ms-border-radius: 50px 0 0 0;
+    -o-border-radius: 50px 0 0 0;
 }
